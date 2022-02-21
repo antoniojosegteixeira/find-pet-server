@@ -2,6 +2,7 @@ import express from "express";
 import cors from "cors";
 import mongoose from "mongoose";
 import "dotenv/config";
+import router from "./routes/index.js";
 
 const app = express();
 
@@ -16,3 +17,5 @@ mongoose
     app.listen(PORT, () => console.log("Server running on port", PORT));
   })
   .catch((err) => console.log(err.message));
+
+app.use("/", router);
