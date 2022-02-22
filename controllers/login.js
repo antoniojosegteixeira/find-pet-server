@@ -1,5 +1,6 @@
 import User from "../models/User.js";
 import bcrypt from "bcrypt";
+import { createUserToken } from "../functions/jwt.js";
 
 export const loginController = async (req, res) => {
   const { email, password } = req.body.data;
@@ -17,7 +18,11 @@ export const loginController = async (req, res) => {
     return res.status(401).send({ error: "Invalid password" });
   }
 
-  // Returning user
+  // Creating session token
+  const token = await createUserToken(user._id);
+
+  // Returning user and token
   user.password = undefined;
-  res.send({ user });
+  user.token = token;
+  res.send(user);
 };
