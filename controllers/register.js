@@ -4,8 +4,15 @@ export const registerController = async (req, res) => {
   /// Check if email already exists
   const { email } = req.body;
   if (await User.findOne({ email })) {
-    return res.send().status(409).send("Email already exists");
-  } else {
-    res.send().status(200);
+    return res.status(409).send("Email already exists");
   }
+
+  // Creating user
+  const newUser = await User.create(req.body);
+
+  // Deleting password from schema
+  newUser.password = undefined;
+
+  // Sending
+  res.status(200).send(user);
 };
