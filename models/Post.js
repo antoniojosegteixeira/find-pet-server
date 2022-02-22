@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const postSchema = mongoose.Schema({
-  name: { type: String, required: true },
+  animalName: { type: String, required: true },
   species: { type: String, required: true },
   color: { type: String },
   images: [{ type: String }],
