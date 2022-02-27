@@ -3,7 +3,6 @@ import cors from "cors";
 import mongoose from "mongoose";
 import "dotenv/config";
 import router from "./routes/index.js";
-import { cloudConfig } from "./cloud/cloudinary.js";
 
 const app = express();
 app.use(express.json());
@@ -20,8 +19,5 @@ mongoose
     app.listen(PORT, () => console.log("Server running on port", PORT));
   })
   .catch((err) => console.log(err.message));
-
-// Configure cloud service
-cloudConfig();
 
 app.use("/", router);
